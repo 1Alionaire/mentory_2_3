@@ -1,0 +1,40 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'products/style1.css' %}" rel="stylesheet" >
+{% endblock %}
+
+{% block  content_1 %}
+    <div class="container">
+        <h1>Добавление продукта</h1>
+        <form  method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{chosen_product.name.id_for_label}}">Имя</label>
+                <input type="text" name="name" value="{{chosen_product.name}}" />
+            </div>
+            <div class="form-group">
+                <label for="{{chosen_product.description.id_for_label}}">Имя</label><br>
+                <input type="text" name="description" value="{{chosen_product.description}}" />
+            </div>
+            <div class="form-group">
+                <label for="{chosen_product.category.id_for_label}}">Категория</label>
+                <select id="category" name="category">
+                    {% for category in categories %}
+                    <option value="category.id">{{ category.category_name }}</option>
+                    {%  endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Цена</label><br>
+                <input type="number" name="price" value="{{chosen_product.price}}" />
+            </div>
+            <div class="form-group">
+                <label>Количество</label><br>
+                <input type="number" name="quantity" value="{{chosen_product.quantity}}" />
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+{% endblock %}
